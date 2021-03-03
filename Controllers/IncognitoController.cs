@@ -44,12 +44,12 @@ namespace portar_proyectos_api.Controllers
         }
 
         [HttpGet("GetAllFinalProjectByCareer/{Career}")]
-        public async Task<IActionResult> GetAllFinalProjectByCareer(string Career)
+        public IActionResult GetAllFinalProjectByCareer(string Career)
         {
             try
             {
                 // save 
-                var resurt = await _incognitoService.GetAllFinalProjectByCareer(Career);
+                var resurt = _incognitoService.GetAllFinalProjectByCareer(Career);
                 return Ok(resurt);
             }
             catch (AppException ex)
@@ -76,12 +76,12 @@ namespace portar_proyectos_api.Controllers
         }
 
         [HttpGet("GetAllProposedProjectByCareer/{Career}")]
-        public async Task<IActionResult> GetAllProposedProjectByCareer(string Career)
+        public IActionResult GetAllProposedProjectByCareer(string Career)
         {
             try
             {
                 // save 
-                  var resurt = await _incognitoService.GetAllProposedProjectByCareer(Career);
+                  var resurt = _incognitoService.GetAllProposedProjectByCareer(Career);
                 return Ok(resurt);
             }
             catch (AppException ex)

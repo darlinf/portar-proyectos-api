@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using portar_proyectos_api.Data.Entities;
 using portar_proyectos_api.Data.Interfaces;
 using portar_proyectos_api.Dtos;
 using System;
@@ -25,6 +26,20 @@ namespace portar_proyectos_api.Controllers
         {
             _mapper = mapper;
             _adminService = adminService;
+        }
+
+        [HttpPut("EditTeacher")]
+        public async Task<IActionResult> EditTeacher(Teacher teacher)
+        {
+            try
+            {
+                await _adminService.EditTeacher(teacher);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         [HttpGet("GetAllTeacher")]

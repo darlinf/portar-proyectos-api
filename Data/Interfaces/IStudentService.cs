@@ -12,7 +12,7 @@ namespace portar_proyectos_api.Data.Interfaces
         Task<ProposedProject> GetProposedProject(int StudentId);
         Task<FinalProject> GetFinalProyect(int StudentId);
         Task UpdateFinalProyect(FinalProject finalProyect);
-        Task GetAllProposedProject(int GroupId);
+        List<ProposedProject> GetAllProposedProject( int UserId, string GroupId);
         Task UpdateProposedProject(ProposedProject proposedProject);
         Task CreateChapterProject(ChapterProject chapterProject);
         List<ChapterProject> GetAllChapterProject(int StudentId);

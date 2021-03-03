@@ -66,13 +66,13 @@ namespace portar_proyectos_api.Controllers
             }
         }
 
-        [HttpGet("GetAllProposedProject/{GroupId}")]
-        public async Task<IActionResult> GetAllProposedProject(int GroupId)
+        [HttpGet("GetAllProposedProject/{UserId}/{GroupId}")]
+        public IActionResult GetAllProposedProject(int UserId, string GroupId)
         {
             try
             {
-                await _studentService.GetAllProposedProject(GroupId);
-                return Ok();
+                var resurt = _studentService.GetAllProposedProject(UserId, GroupId);
+                return Ok(resurt);
             }
             catch (AppException ex)
             {

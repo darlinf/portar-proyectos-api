@@ -13,8 +13,8 @@ namespace portar_proyectos_api.Data.Interfaces
         User Authentication(string Mail, string Password);
         Task Register(UserDto userDto);
         Task<List<ProposedProject>> GetAllProposedProject();
-        Task<List<List<ProposedProject>>> GetAllProposedProjectByCareer(string Career);
+        List<ProposedProject> GetAllProposedProjectByCareer(string Career);
         Task<List<FinalProject>> GetAllFinalProject();
-        Task<List<FinalProject>> GetAllFinalProjectByCareer(string Career);
+        List<FinalProject> GetAllFinalProjectByCareer(string Career);
     }
 }

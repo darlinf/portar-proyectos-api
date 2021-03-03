@@ -38,9 +38,17 @@ namespace portar_proyectos_api.Service.Services
             return _context.ChapterProjects.Where(x => x.StudentId == StudentId).ToList();
         }
 
-        public Task GetAllProposedProject(int GroupId)
+        public List<ProposedProject> GetAllProposedProject(int UserId, string GroupId)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.FirstOrDefault(x => x.Id == UserId);
+            var section = _context.Students.Where(x => x.Id == user.StudentId).Select(x => x.StudentSection).ToList();
+            var resurt = (from student in _context.Students.Where(x => x.BelongGroup == GroupId)
+                       join studentSections in _context.StudentSections.Where(x => x.SectionId == section[0].SectionId)
+                       on student.Id equals studentSections.StudentId
+                       join proposedProjects in _context.ProposedProjects
+                       on student.Id equals proposedProjects.StudentId
+                       select proposedProjects).ToList();    
+            return resurt;
         }
 
         public async Task<FinalProject> GetFinalProyect(int StudentId)

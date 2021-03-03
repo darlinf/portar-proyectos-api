@@ -65,22 +65,28 @@ namespace portar_proyectos_api.Service.Services
 
         public async Task<List<FinalProject>> GetAllFinalProject()
         {
-            return await _context.FinalProjects.ToListAsync();
+            return await _context.FinalProjects.Where(x => x.State == "approved").ToListAsync();
         }
 
-        public async Task<List<FinalProject>> GetAllFinalProjectByCareer(string Career)
+        public List<FinalProject> GetAllFinalProjectByCareer(string Career)
         {
-            return await _context.Students.Where(x => x.Career == Career).Select(x => x.FinalProject).ToListAsync();
+            return (from student in _context.Students.Where(x => x.Career == Career)
+                    join finalProjects in _context.FinalProjects.Where(x => x.State == "approved")
+                    on student.Id equals finalProjects.StudentId
+                    select finalProjects).ToList();
         }
 
         public async Task<List<ProposedProject>> GetAllProposedProject()
         {
-            return await _context.ProposedProjects.ToListAsync();
+            return await _context.ProposedProjects.Where(x => x.State == "potential").ToListAsync();
         }
 
-        public async Task<List<List<ProposedProject>>> GetAllProposedProjectByCareer(string Career)
+        public List<ProposedProject> GetAllProposedProjectByCareer(string Career)
         {
-            return await _context.Students.Where(x => x.Career == Career).Select(x => x.ProposedProjects).ToListAsync();
+            return (from student in _context.Students.Where(x => x.Career == Career)
+                    join proposedProjects in _context.ProposedProjects.Where(x => x.State == "potential")
+                    on student.Id equals proposedProjects.StudentId
+                    select proposedProjects).ToList();
         }
 
         public async Task Register(UserDto userDto)
