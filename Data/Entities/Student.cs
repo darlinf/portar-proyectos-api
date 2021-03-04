@@ -14,6 +14,7 @@ namespace portar_proyectos_api.Data.Entities
         public string HomeState { get; set; }
         public string BelongGroup { get; set; }
         public string Career { get; set; }
+        public string State { get; set; }
         public List<ProposedProject> ProposedProjects { get; set; }
         public FinalProject FinalProject { get; set; }
         public List<ChapterProject> ChapterProjects { get; set; }

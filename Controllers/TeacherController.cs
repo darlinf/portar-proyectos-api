@@ -100,7 +100,7 @@ namespace portar_proyectos_api.Controllers
             }
         }
 
-        [HttpPost("updateProjectForEvaluate")]
+        [HttpPut("updateProjectForEvaluate")]
         public async Task<IActionResult> updateProjectForEvaluate(ProposedProject proposedProject)
         {
             try

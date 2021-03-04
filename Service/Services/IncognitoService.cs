@@ -36,6 +36,8 @@ namespace portar_proyectos_api.Service.Services
 
             var user = _context.Users.SingleOrDefault(x => x.Mail == Mail);
 
+            
+
             // check if username exists
             if (user == null)
                 return null;
@@ -43,6 +45,15 @@ namespace portar_proyectos_api.Service.Services
             // check if password is correct
             if (!VerifyPasswordHash(Password, user.PasswordHash, user.PasswordSalt))
                 return null;
+
+            if(user.StudentId != null)
+            {
+                var student = _context.Students.FirstOrDefault(x => x.Id == user.StudentId);
+                if(student.State == "still")
+                    throw new AppException("Estás pendiente de aprobación");
+                if (student.State == "denied")
+                    throw new AppException("Tu credencial de acceso ha sido negada");
+            }
 
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
