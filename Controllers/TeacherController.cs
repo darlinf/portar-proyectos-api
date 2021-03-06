@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using portar_proyectos_api.Data.Entities;
@@ -7,10 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Entities;
 using WebApi.Helpers;
 
 namespace portar_proyectos_api.Controllers
 {
+    [Authorize(Roles = Role.Teacher)]
     [Route("api/[controller]")]
     [ApiController]
     public class TeacherController : ControllerBase

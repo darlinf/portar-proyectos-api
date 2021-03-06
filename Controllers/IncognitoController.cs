@@ -106,6 +106,8 @@ namespace portar_proyectos_api.Controllers
                     user.Mail,
                     user.Name,
                     user.Role,
+                    user.StudentId,
+                    user.TeacherId,
                     user.Token
                 });
             }
