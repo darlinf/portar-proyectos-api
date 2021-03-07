@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using portar_proyectos_api.Data.Entities;
 using portar_proyectos_api.Data.Interfaces;
+using portar_proyectos_api.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ using WebApi.Helpers;
 
 namespace portar_proyectos_api.Controllers
 {
-    [Authorize(Roles = Role.Student)]
+   // [Authorize(Roles = Role.Student)]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
@@ -111,12 +112,12 @@ namespace portar_proyectos_api.Controllers
             }
         }
 
-        [HttpPut("UpdateFinalProyect")]
-        public async Task<IActionResult> UpdateFinalProyect(FinalProject finalProyect)
+        [HttpPost("CreateFinalProyect")]
+        public async Task<IActionResult> CreateFinalProyect(FinalProyectDto finalProyectDto)
         {
             try
             {
-                await _studentService.UpdateFinalProyect(finalProyect);
+                //await _studentService.CreateFinalProyect(finalProyect);
                 return Ok();
             }
             catch (AppException ex)

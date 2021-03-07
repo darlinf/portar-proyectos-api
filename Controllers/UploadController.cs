@@ -12,13 +12,12 @@ namespace UploadFileUsingDotNETCore.Controllers
     [ApiController]
     public class UploadController : ControllerBase
     {
+        string fileUrl;
+
         [HttpPost("upload", Name = "upload")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-       // public async Task<IActionResult> UploadFile(IFormFile file, CancellationToken cancellationToken)
-        public async Task<IActionResult> UploadFile(
-         IFormFile file,
-         CancellationToken cancellationToken)
+        public async Task<IActionResult> UploadFile( IFormFile file, CancellationToken cancellationToken)
         {
             if (CheckIfExcelFile(file))
             {
@@ -29,22 +28,13 @@ namespace UploadFileUsingDotNETCore.Controllers
                 return BadRequest(new { message = "Invalid file extension" });
             }
 
-            return Ok();
+            return Ok(fileUrl);
         }
 
-        /// <summary>
-        /// Method to check if file is excel file
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
         private bool CheckIfExcelFile(IFormFile file)
         {
             var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
-
-            return (extension == ".png" || extension == ".jpg" || extension == ".pdf"); // Change the extension based on your need
-
-            //return (extension == ".png" || extension == ".jpg"); // Change the extension based on your need
-
+            return (extension == ".png" || extension == ".jpg" || extension == ".pdf"); 
         }
 
         private async Task<bool> WriteFile(IFormFile file)
@@ -56,27 +46,18 @@ namespace UploadFileUsingDotNETCore.Controllers
                 var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
                 fileName = DateTime.Now.Ticks + extension; //Create a new Name for the file due to security reasons.
 
-
                 string path = "";
                 if (extension == ".png" || extension == ".jpg")
                 {
                      path = Path.Combine(Directory.GetCurrentDirectory(), "Resources\\Images", fileName);
+                     fileUrl = "Resources/Images/" + fileName;
                 }
 
                 if (extension == ".pdf")
                 {
                     path = Path.Combine(Directory.GetCurrentDirectory(), "Resources\\pdf", fileName);
+                    fileUrl = "Resources/pdf/"+fileName;
                 }
-
-
-                var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "Resources\\Images");
-
-                if (!Directory.Exists(pathBuilt))
-                {
-                    Directory.CreateDirectory(pathBuilt);
-                }
-
-                path = Path.Combine(Directory.GetCurrentDirectory(), "Resources\\Images", fileName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {

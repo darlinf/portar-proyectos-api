@@ -61,9 +61,9 @@ namespace portar_proyectos_api.Service.Services
             return await _context.ProposedProjects.FindAsync(StudentId);
         }
 
-        public async Task UpdateFinalProyect(FinalProject finalProyect)
+        public async Task CreateFinalProyect(FinalProject finalProyect)
         {
-            _context.Update(finalProyect);
+            _context.Add(finalProyect);
             await _context.SaveChangesAsync();
         }
 
