@@ -42,7 +42,7 @@ namespace portar_proyectos_api.Controllers
             throw new NotImplementedException();
         }
 
-        [HttpGet]
+        [HttpGet("GetAllFinalProjectForEvaluate/{TeacherId}/{section}/{projectState}")]
         public IActionResult GetAllFinalProjectForEvaluate(int TeacherId, string section, string projectState)
         {
             try

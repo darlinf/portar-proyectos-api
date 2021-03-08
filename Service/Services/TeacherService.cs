@@ -67,6 +67,7 @@ namespace portar_proyectos_api.Service.Services
                             finalProject.FinalDocumentationSRC,
                             finalProject.ImageSRC,
                             finalProject.Description,
+                            finalProject.Name,
 
                             studenName = user.Name,
                             student.Enrollment
@@ -94,6 +95,7 @@ namespace portar_proyectos_api.Service.Services
                             finalProject.FinalDocumentationSRC,
                             finalProject.ImageSRC,
                             finalProject.Description,
+                            finalProject.Name,
 
                             studenName = user.Name,
                             student.Enrollment
@@ -119,6 +121,7 @@ namespace portar_proyectos_api.Service.Services
                             finalProject.FinalDocumentationSRC,
                             finalProject.ImageSRC,
                             finalProject.Description,
+                            finalProject.Name,
 
                             studenName = user.Name,
                             student.Enrollment
@@ -144,6 +147,7 @@ namespace portar_proyectos_api.Service.Services
                         finalProject.FinalDocumentationSRC,
                         finalProject.ImageSRC,
                         finalProject.Description,
+                        finalProject.Name,
 
                         studenName = user.Name,
                         student.Enrollment
@@ -169,6 +173,7 @@ namespace portar_proyectos_api.Service.Services
                                 proposedProjects.State,
                                 proposedProjects.Justification,
                                 proposedProjects.Description,
+
                                 
                                 studenName = user.Name,
                                 student.Enrollment

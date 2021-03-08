@@ -113,11 +113,11 @@ namespace portar_proyectos_api.Controllers
         }
 
         [HttpPost("CreateFinalProyect")]
-        public async Task<IActionResult> CreateFinalProyect(FinalProyectDto finalProyectDto)
+        public async Task<IActionResult> CreateFinalProyect(FinalProject finalProyect)
         {
             try
             {
-                //await _studentService.CreateFinalProyect(finalProyect);
+                await _studentService.CreateFinalProyect(finalProyect);
                 return Ok();
             }
             catch (AppException ex)
