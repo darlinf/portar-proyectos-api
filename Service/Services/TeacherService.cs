@@ -251,6 +251,11 @@ namespace portar_proyectos_api.Service.Services
                     }).ToList();
         }
 
+        public List<Section> GetAllSection(int TeacherId)
+        {
+            return _context.Sections.Where(x => x.TeacherId == TeacherId).ToList();
+        }
+
         public object GetAllStudentForCredentials(int TeacherId, string estudentState, string section)
         {
             if (estudentState == "all" && section != "all")

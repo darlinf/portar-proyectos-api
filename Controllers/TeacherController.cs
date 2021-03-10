@@ -70,6 +70,20 @@ namespace portar_proyectos_api.Controllers
             }
         }
 
+        [HttpGet("GetAllSection/{TeacherId}")]
+        public IActionResult GetAllSection(int TeacherId)
+        {
+            try
+            {
+                var resurt = _teacherService.GetAllSection(TeacherId);
+                return Ok(resurt);
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         [HttpGet("GetAllStudentForCredentials/{TeacherId}/{section}/{estudentState}")]
         public IActionResult GetAllStudentForCredentials(int TeacherId, string section, string estudentState)
         {
@@ -89,7 +103,7 @@ namespace portar_proyectos_api.Controllers
             throw new NotImplementedException();
         }*/
 
-        [HttpPost("updateFinalProject")]
+        [HttpPut("updateFinalProject")]
         public async Task<IActionResult> updateFinalProject(FinalProject finalProject)
         {
             try
@@ -117,7 +131,7 @@ namespace portar_proyectos_api.Controllers
             }
         }
 
-        [HttpPost("updateStudentForCredentials")]
+        [HttpPut("updateStudentForCredentials")]
         public async Task<IActionResult> updateStudentForCredentials(Student student)
         {
             try

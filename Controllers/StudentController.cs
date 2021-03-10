@@ -14,7 +14,7 @@ using WebApi.Helpers;
 
 namespace portar_proyectos_api.Controllers
 {
-   // [Authorize(Roles = Role.Student)]
+    [Authorize(Roles = Role.Student)]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
@@ -42,7 +42,7 @@ namespace portar_proyectos_api.Controllers
             }
         }
 
-        [HttpPost("CreateProposedProject")]
+        [HttpPost("CreateProposedProject")] 
         public async Task<IActionResult> CreateProposedProject(ProposedProject proposedProject)
         {
             try
