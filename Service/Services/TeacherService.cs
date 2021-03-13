@@ -263,23 +263,19 @@ namespace portar_proyectos_api.Service.Services
                 return (from sections in _context.Sections.Where(x => x.TeacherId == TeacherId && x.SectionNumber == section)
                         join studentSection in _context.StudentSections
                         on sections.Id equals studentSection.SectionId
-                        join proposedProjects in _context.ProposedProjects
-                        on studentSection.StudentId equals proposedProjects.StudentId
                         join student in _context.Students
-                        on proposedProjects.StudentId equals student.Id
+                        on studentSection.StudentId equals student.Id
                         join user in _context.Users
                         on student.Id equals user.StudentId
                         select new
                         {
-                            proposedProjectsId = proposedProjects.Id,
-                            proposedProjects.StudentId,
-                            proposedProjects.Name,
-                            proposedProjects.State,
-                            proposedProjects.Justification,
-                            proposedProjects.Description,
-
-                            studenName = user.Name,
-                            student.Enrollment
+                            studentId = student.Id,
+                            student.Enrollment,
+                            student.HomeState,
+                            student.BelongGroup,
+                            student.Career,
+                            student.State,
+                            user.Name
                         }).ToList();
             }
             if (section == "all" && estudentState != "all")
@@ -287,23 +283,19 @@ namespace portar_proyectos_api.Service.Services
                 return (from sections in _context.Sections.Where(x => x.TeacherId == TeacherId)
                         join studentSection in _context.StudentSections
                         on sections.Id equals studentSection.SectionId
-                        join proposedProjects in _context.ProposedProjects.Where(x => x.State == estudentState)
-                        on studentSection.StudentId equals proposedProjects.StudentId
-                        join student in _context.Students
-                        on proposedProjects.StudentId equals student.Id
+                        join student in _context.Students.Where(x => x.State == estudentState)
+                        on studentSection.StudentId equals student.Id
                         join user in _context.Users
                         on student.Id equals user.StudentId
                         select new
                         {
-                            proposedProjectsId = proposedProjects.Id,
-                            proposedProjects.StudentId,
-                            proposedProjects.Name,
-                            proposedProjects.State,
-                            proposedProjects.Justification,
-                            proposedProjects.Description,
-
-                            studenName = user.Name,
-                            student.Enrollment
+                            studentId = student.Id,
+                            student.Enrollment,
+                            student.HomeState,
+                            student.BelongGroup,
+                            student.Career,
+                            student.State,
+                            user.Name
                         }).ToList();
             }
             if (section == "all" && estudentState == "all")
@@ -330,66 +322,21 @@ namespace portar_proyectos_api.Service.Services
             return (from sections in _context.Sections.Where(x => x.TeacherId == TeacherId && x.SectionNumber == section)
                     join studentSection in _context.StudentSections
                     on sections.Id equals studentSection.SectionId
-                    join proposedProjects in _context.ProposedProjects.Where(x => x.State == estudentState)
-                    on studentSection.StudentId equals proposedProjects.StudentId
-                    join student in _context.Students
-                    on proposedProjects.StudentId equals student.Id
+                    join student in _context.Students.Where(x => x.State == estudentState)
+                    on studentSection.StudentId equals student.Id
                     join user in _context.Users
                     on student.Id equals user.StudentId
                     select new
                     {
-                        proposedProjectsId = proposedProjects.Id,
-                        proposedProjects.StudentId,
-                        proposedProjects.Name,
-                        proposedProjects.State,
-                        proposedProjects.Justification,
-                        proposedProjects.Description,
-
-                        studenName = user.Name,
-                        student.Enrollment
+                        studentId = student.Id,
+                        student.Enrollment,
+                        student.HomeState,
+                        student.BelongGroup,
+                        student.Career,
+                        student.State,
+                        user.Name
                     }).ToList();
         }
-
-       /* public Task<List<Student>> GetAllChapterProject(int TeacherId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Student>> GetAllFinalProjectForEvaluate(int TeacherId, string section, string projectState)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Student>> GetAllProjectForEvaluate(int TeacherId, string section, string projectState)
-        {
-            /* var innerJoin = (from teacher in _context.Sections.Where(x => x.TeacherId == TeacherId) 
-                              join user in _context.Users
-                              on teacher.Id equals user.TeacherId // key selector 
-                              select new
-                              {
-                                  Id = teacher.Id,
-                                  Mail = user.Mail,
-                                  Name = user.Name
-                              }).ToList();
-
-           var sectionGet = _context.Sections.Where(x => x.TeacherId == TeacherId && x.SectionNumber == section).Select(x => x.StudentSections).ToList();
-
-
-
-            var innerJoi2 = from studentSections in _context.Sections.Where(x => x.TeacherId == TeacherId && x.SectionNumber == section)
-                            join proposedProjects in _context.ProposedProjects 
-                            on studentSections.TeacherId equals proposedProjects.StudentId
-                            select new 
-                            {
-                                ss = proposedProjects
-                            };
-            return null;
-        }
-        
-        public Task<List<Student>> GetAllStudentForCredentials(int TeacherId, string estudentState = "todo", string section = "todo")
-        {
-            throw new NotImplementedException();
-        }*/
 
         public async Task updateChapterProject(ChapterProject chapterProject)
         {

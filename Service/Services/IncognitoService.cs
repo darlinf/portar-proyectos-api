@@ -134,6 +134,7 @@ namespace portar_proyectos_api.Service.Services
                  BelongGroup = userDto.SubjectCode,
                  Career = userDto.Career,
                  User = users,
+                 State = "evaluate"
              };
 
             await _context.AddAsync(student);
