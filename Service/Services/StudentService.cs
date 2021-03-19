@@ -51,9 +51,9 @@ namespace portar_proyectos_api.Service.Services
             return resurt;
         }
 
-        public async Task<FinalProject> GetFinalProyect(int StudentId)
+        public FinalProject GetFinalProyect(int StudentId)
         {
-            return await _context.FinalProjects.FindAsync(StudentId);
+            return _context.FinalProjects.FirstOrDefault(x => x.StudentId == StudentId);
         }
 
         public async Task<ProposedProject> GetProposedProject(int StudentId)
@@ -70,6 +70,13 @@ namespace portar_proyectos_api.Service.Services
         public async Task UpdateProposedProject(ProposedProject proposedProject)
         {
             _context.Update(proposedProject);
+            await _context.SaveChangesAsync();
+        }
+        public async Task UpdateUserForFinalProject(int Id, string HomeState)
+        {
+            var user = _context.Students.FirstOrDefault(x => x.Id == Id);
+            user.HomeState = HomeState;
+            _context.Update(user);
             await _context.SaveChangesAsync();
         }
     }

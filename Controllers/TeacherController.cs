@@ -98,10 +98,23 @@ namespace portar_proyectos_api.Controllers
             }
         }
 
-       /* public IActionResult GetAllStudentForCredentials(int TeacherId, string estudentState = "todo", string section = "todo")
+        /* public IActionResult GetAllStudentForCredentials(int TeacherId, string estudentState = "todo", string section = "todo")
+         {
+             throw new NotImplementedException();
+         }*/
+        [HttpGet("UpdateUserForFinalProject/{Id}/{HomeState}")]
+        public async Task<IActionResult> UpdateUserForFinalProject(int Id, string HomeState)
         {
-            throw new NotImplementedException();
-        }*/
+            try
+            {
+                await _teacherService.UpdateUserForFinalProject(Id, HomeState);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
         [HttpPut("updateFinalProject")]
         public async Task<IActionResult> updateFinalProject(FinalProject finalProject)

@@ -97,9 +97,15 @@ namespace portar_proyectos_api.Controllers
             try
             {
                 var user = _incognitoService.Authentication(model.Mail, model.Password);
+                string HomeState = null;
 
                 if (user == null)
                     return BadRequest(new { message = "Usuario o contrasena incorectos" });
+                if (user.Role == "Student")
+                {
+                   HomeState = _incognitoService.GetStudentById((int)user.StudentId).HomeState;   
+                }
+
                 return Ok(new
                 {
                     user.Id,
@@ -108,7 +114,8 @@ namespace portar_proyectos_api.Controllers
                     user.Role,
                     user.StudentId,
                     user.TeacherId,
-                    user.Token
+                    user.Token,
+                    HomeState
                 });
             }
             catch (AppException ex)

@@ -17,5 +17,6 @@ namespace portar_proyectos_api.Data.Interfaces
         object GetAllChapterProject(int TeacherId);
         Task updateChapterProject(ChapterProject chapterProject); 
         List<Section> GetAllSection(int TeacherId);
+        Task UpdateUserForFinalProject(int Id, string HomeState);
     }
 }

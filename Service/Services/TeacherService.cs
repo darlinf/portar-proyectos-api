@@ -361,5 +361,12 @@ namespace portar_proyectos_api.Service.Services
             _context.Update(student);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateUserForFinalProject(int Id, string HomeState)
+        {
+            var user = _context.Students.FirstOrDefault(x => x.Id == Id);
+            user.HomeState = HomeState;
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+        }
     }
 }

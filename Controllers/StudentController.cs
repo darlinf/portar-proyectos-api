@@ -28,6 +28,20 @@ namespace portar_proyectos_api.Controllers
             _studentService = studentService;
         }
 
+        [HttpGet("UpdateUserForFinalProject/{Id}/{HomeState}")]
+        public async Task<IActionResult> UpdateUserForFinalProject(int Id, string HomeState)
+        {
+            try
+            {
+                await _studentService.UpdateUserForFinalProject(Id, HomeState);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         [HttpPost("CreateChapterProject")]
         public async Task<IActionResult> CreateChapterProject(ChapterProject chapterProject)
         {
@@ -85,12 +99,12 @@ namespace portar_proyectos_api.Controllers
         }
 
         [HttpGet("GetFinalProyect/{StudentId}")]
-        public async Task<IActionResult> GetFinalProyect(int StudentId)
+        public IActionResult GetFinalProyect(int StudentId)
         {
             try
             {
-                await _studentService.GetFinalProyect(StudentId);
-                return Ok();
+                var finalProject = _studentService.GetFinalProyect(StudentId);
+                return Ok(finalProject);
             }
             catch (AppException ex)
             {

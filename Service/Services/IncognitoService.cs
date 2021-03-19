@@ -188,5 +188,10 @@ namespace portar_proyectos_api.Service.Services
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
+
+        public Student GetStudentById(int Id)
+        {
+            return _context.Students.FirstOrDefault(x => x.Id == Id);
+        }
     }
 }

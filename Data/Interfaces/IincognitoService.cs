@@ -11,6 +11,7 @@ namespace portar_proyectos_api.Data.Interfaces
     public interface IincognitoService
     {
         User Authentication(string Mail, string Password);
+        Student GetStudentById (int Id);
         Task Register(UserDto userDto);
         Task<List<ProposedProject>> GetAllProposedProject();
         List<ProposedProject> GetAllProposedProjectByCareer(string Career);
