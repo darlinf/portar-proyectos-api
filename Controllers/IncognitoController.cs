@@ -98,12 +98,15 @@ namespace portar_proyectos_api.Controllers
             {
                 var user = _incognitoService.Authentication(model.Mail, model.Password);
                 string HomeState = null;
+                string BelongGroup = null;
 
                 if (user == null)
                     return BadRequest(new { message = "Usuario o contrasena incorectos" });
                 if (user.Role == "Student")
                 {
-                   HomeState = _incognitoService.GetStudentById((int)user.StudentId).HomeState;   
+                    var student= _incognitoService.GetStudentById((int)user.StudentId);
+                    HomeState = student.HomeState;
+                    BelongGroup = student.BelongGroup;
                 }
 
                 return Ok(new
@@ -115,7 +118,8 @@ namespace portar_proyectos_api.Controllers
                     user.StudentId,
                     user.TeacherId,
                     user.Token,
-                    HomeState
+                    HomeState,
+                    BelongGroup
                 });
             }
             catch (AppException ex)

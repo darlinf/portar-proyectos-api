@@ -11,7 +11,5 @@ namespace portar_proyectos_api.Data.Entities
         public string SectionNumber { get; set; }
         public int TeacherId { get; set; }
         public List<StudentSection> StudentSections { get; set; }
-        //public int StudentId { get; set; }
-        //public IList<StudentSection> StudentSections { get; set; }
     }
 }

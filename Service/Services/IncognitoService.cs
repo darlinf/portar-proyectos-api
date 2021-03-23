@@ -49,7 +49,7 @@ namespace portar_proyectos_api.Service.Services
             if(user.StudentId != null)
             {
                 var student = _context.Students.FirstOrDefault(x => x.Id == user.StudentId);
-                if(student.State == "still")
+                if(student.State == "evaluate")
                     throw new AppException("Estás pendiente de aprobación");
                 if (student.State == "denied")
                     throw new AppException("Tu credencial de acceso ha sido negada");

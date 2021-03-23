@@ -174,7 +174,7 @@ namespace portar_proyectos_api.Service.Services
                                 proposedProjects.Justification,
                                 proposedProjects.Description,
 
-                                
+                                student.BelongGroup,
                                 studenName = user.Name,
                                 student.Enrollment
                             }).ToList();
@@ -199,6 +199,7 @@ namespace portar_proyectos_api.Service.Services
                             proposedProjects.Justification,
                             proposedProjects.Description,
 
+                            student.BelongGroup,
                             studenName = user.Name,
                             student.Enrollment
                         }).ToList();
@@ -223,6 +224,7 @@ namespace portar_proyectos_api.Service.Services
                             proposedProjects.Justification,
                             proposedProjects.Description,
 
+                            student.BelongGroup,
                             studenName = user.Name,
                             student.Enrollment
                         }).ToList();
@@ -246,6 +248,7 @@ namespace portar_proyectos_api.Service.Services
                         proposedProjects.Justification,
                         proposedProjects.Description,
 
+                        student.BelongGroup,
                         studenName = user.Name,
                         student.Enrollment
                     }).ToList();
