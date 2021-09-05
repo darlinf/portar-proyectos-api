@@ -6,5 +6,3 @@
   * Entity frameword
   * AutoMapper
   * Authentication JwtBearer
-
-Frontend 
